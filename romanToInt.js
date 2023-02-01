@@ -45,33 +45,29 @@ const ROMAN_NUM_TO_INT_VALUE = {
     'M': 1000,
 };
 
-function romanToInt(x){
+function romanToInt(x) {
     let value = 0;
-    let skipNextValue = false;
+    let skipNextLetter = false;
 
-    for(let i = 0; i < x.length; i++){
-        //console.log(x[i]);
-        if(skipNextValue){
-            skipNextValue = false;
+    for (let i = 0; i < x.length; i++) {
+        if (skipNextLetter) {
+            skipNextLetter = false;
             continue;
         }
-        else{
-            let currLetter = x[i];
-            let nextLetter = x[i+1];
-            
-            let currValue = ROMAN_NUM_TO_INT_VALUE[currLetter];
-            let nextValue = ROMAN_NUM_TO_INT_VALUE[nextLetter];
-            
-            //console.log(`currValue ${currLetter} ${currValue} nextValue ${nextLetter} ${nextValue}`);
-    
-            if(nextValue > currValue){
-                value += nextValue - currValue;
-                //skip the next letter/value
-                skipNextValue = true;
-            }        
-            else{
-                value += currValue;
-            }
+        let currLetter = x[i];
+        let nextLetter = x[i + 1];
+
+        let currValue = ROMAN_NUM_TO_INT_VALUE[currLetter];
+        let nextValue = ROMAN_NUM_TO_INT_VALUE[nextLetter];
+
+        if (nextValue > currValue) {
+            //Doing this to handle cases where the roman numeral evalutes to 4 or 9 i.e. IV, IX.
+            value += nextValue - currValue;
+            //Skip next indice because nextLetter has been used in line above
+            skipNextLetter = true;
+        }
+        else {
+            value += currValue;
         }
     }
     return value;
