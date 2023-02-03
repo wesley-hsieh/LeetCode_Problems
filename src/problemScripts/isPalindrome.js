@@ -1,4 +1,4 @@
-function isPalidrome(x){
+export function isPalindrome(x){
     let reverse = 0;
     let copy = x;
 
