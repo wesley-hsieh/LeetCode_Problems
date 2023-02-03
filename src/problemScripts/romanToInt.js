@@ -45,7 +45,7 @@ const ROMAN_NUM_TO_INT_VALUE = {
     'M': 1000,
 };
 
-function romanToInt(x) {
+export function romanToInt(x) {
     let value = 0;
     let skipNextLetter = false;
 
